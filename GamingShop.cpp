@@ -2,17 +2,35 @@
 #include <string>
 #include <vector>
 
-struct Product {
+class Product {
     std::string name{};
     int price{};
     int inventory{};
+public:
+    void set_name (std::string n);
+
+    void set_price (int p);
+
+    void set_inventory (int i);
 };
 
-struct Game : public Product {};
-struct Console : public Product {};
-struct Monitor : public Product {};
-struct Headset : public Product {};
-struct Cart : public Product {};
+void Product::set_name (std::string n) {
+    name = n;
+}
+
+void Product::set_price (int p){
+    price = p;
+}
+
+void Product::set_inventory (int i){
+    inventory = i;
+}
+
+class Game : public Product {};
+class Console : public Product {};
+class Monitor : public Product {};
+class Headset : public Product {};
+class Cart : public Product {};
 
 std::vector<Game> games;
 std::vector<Console> consoles;
@@ -36,11 +54,19 @@ void add_product(){
         for (int i = 0; i < games.size(); i++) {
             std::cout << "Enter the name of your game: \n";
             std::cin.ignore();
-            std::getline (std::cin, games[i].name);
+            std::string name;
+            std::getline (std::cin, name);
+            games[i].set_name (name);
+
+            int price;
             std::cout << "Enter the price of your game: \n";
-            std::cin >> games[i].price;
+            std::cin >> price;
+            games[i].set_price (price);
+
+            int inventory;
             std::cout << "Enter the inventory of your game: \n";
-            std::cin >> games[i].inventory;
+            std::cin >> inventory;
+            games[i].set_inventory (inventory);
         }
     }
 
@@ -52,11 +78,19 @@ void add_product(){
         for (int i = 0; i < consoles.size(); i++) {
             std::cout << "Enter the name of your console: \n";
             std::cin.ignore();
-            std::getline (std::cin, consoles[i].name);
+            std::string name;
+            std::getline (std::cin, name);
+            consoles[i].set_name (name);
+            
+            int price;
             std::cout << "Enter the price of your console: \n";
-            std::cin >> consoles[i].price;
+            std::cin >> price;
+            consoles[i].set_price (price);
+
+            int inventory;
             std::cout << "Enter the inventory of your console: \n";
-            std::cin >> consoles[i].inventory;
+            std::cin >> inventory;
+            consoles[i].set_inventory (inventory);
         }
     }
     
@@ -68,11 +102,19 @@ void add_product(){
         for (int i = 0; i < monitors.size(); i++) {
             std::cout << "Enter the name of your monitor: \n";
             std::cin.ignore();
-            std::getline (std::cin, monitors[i].name);
+            std::string name;
+            std::getline (std::cin, name);
+            monitors[i].set_name (name);
+
+            int price;
             std::cout << "Enter the price of your monitor: \n";
-            std::cin >> monitors[i].price;
+            std::cin >> price;
+            monitors[i].set_price (price);
+
+            int inventory;
             std::cout << "Enter the inventory of your monitor: \n";
-            std::cin >> monitors[i].inventory; 
+            std::cin >> inventory; 
+            monitors[i].set_inventory (inventory);
         }
     }
     
@@ -84,15 +126,23 @@ void add_product(){
         for (int i = 0; i < headsets.size(); i++) {
             std::cout << "Enter the name of your headset: \n";
             std::cin.ignore();
-            std::getline (std::cin, headsets[i].name);
+            std::string name;
+            std::getline (std::cin, name);
+            headsets[i].set_name (name);
+
+            int price;
             std::cout << "Enter the price of your headset: \n";
-            std::cin >>headsets [i].price;
+            std::cin >> price;
+            headsets[i].set_price (price);
+
+            int inventory;
             std::cout << "Enter the inventory of your headset: \n";
-            std::cin >>headsets[i].inventory;
+            std::cin >> inventory;
+            headsets[i].set_inventory (inventory); 
         }
-    } else {
-        std::cout << "Invalid input! \n";
     }
+     
+    else std::cout << "Invalid input! \n";
 }
 
 void delete_product() {
