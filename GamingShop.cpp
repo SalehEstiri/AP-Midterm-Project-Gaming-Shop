@@ -8,6 +8,7 @@ class Product {
     int inventory{};
 public:
     void set_name (std::string n);
+    std::string get_name ();
 
     void set_price (int p);
 
@@ -16,6 +17,10 @@ public:
 
 void Product::set_name (std::string n) {
     name = n;
+}
+
+std::string Product::get_name (){
+    return name;
 }
 
 void Product::set_price (int p){
@@ -141,7 +146,7 @@ void add_product(){
             headsets[i].set_inventory (inventory); 
         }
     }
-     
+
     else std::cout << "Invalid input! \n";
 }
 
@@ -152,8 +157,9 @@ void delete_product() {
 
     if (product_type == "game"){
         for(int i = 0; i < games.size(); i++){
-            std::cout << i + 1 << "- " << games[i].name << "\n";
+            std::cout << i + 1 << "- " << games[i].get_name() << "\n";
         }
+
         int choice{};
         std::cout << "Enter your choice :";
         std::cin >> choice;
@@ -162,7 +168,7 @@ void delete_product() {
 
     else if (product_type == "console"){
         for(int i = 0; i < consoles.size(); i++){
-            std::cout << i + 1 << "- " << consoles[i].name << "\n";
+            std::cout << i + 1 << "- " << consoles[i].get_name() << "\n";
         }
         int choice{};
         std::cout << "Enter your choice :";
@@ -172,7 +178,7 @@ void delete_product() {
 
     else if (product_type == "headset"){
         for(int i = 0; i < headsets.size(); i++){
-            std::cout << i + 1 << "- " << headsets[i].name << "\n";
+            std::cout << i + 1 << "- " << headsets[i].get_name() << "\n";
         }
         int choice{};
         std::cout << "Enter your choice :";
@@ -182,7 +188,7 @@ void delete_product() {
 
     else if (product_type == "monitor"){
         for(int i = 0; i < monitors.size(); i++){
-            std::cout << i + 1 << "- " << monitors[i].name << "\n";
+            std::cout << i + 1 << "- " << monitors[i].get_name() << "\n";
         }
         int choice{};
         std::cout << "Enter your choice :";
@@ -195,28 +201,28 @@ bool linear_search(std::string name, std::string product_type) {
 
     if (product_type == "game"){
         for(int i = 0; i < games.size(); i++){
-            if(games[i].name == name) return true;
+            if(games[i].get_name() == name) return true;
         } 
         return false;
     }
     
     else if (product_type == "console") {
         for(int i = 0; i < consoles.size(); i++){
-            if(consoles[i].name == name) return true;
+            if(consoles[i].get_name() == name) return true;
         } 
         return false;
     }
     
     else if (product_type == "headset") {
         for(int i = 0; i < headsets.size(); i++){
-            if(headsets[i].name == name) return true;
+            if(headsets[i].get_name() == name) return true;
         } 
         return false;
     } 
     
     else if (product_type == "monitor") {
         for(int i = 0; i < monitors.size(); i++){
-            if(monitors[i].name == name) return true;
+            if(monitors[i].get_name() == name) return true;
         } 
         return false;
     } 
@@ -227,29 +233,36 @@ bool linear_search(std::string name, std::string product_type) {
 int number_search(std::string name, std::string product_type){
     if (product_type == "game"){
         for(int i = 0; i < games.size(); i++){
-            if(games[i].name == name){
+            if(games[i].get_name() == name){
                 return i;
             } 
         } 
-    } else if (product_type == "console") {
+    } 
+
+    else if (product_type == "console") {
         for(int i = 0; i < consoles.size(); i++){
-            if(consoles[i].name == name){
-                return i;
-            } 
-        } 
-    } else if (product_type == "headset") {
-        for(int i = 0; i < headsets.size(); i++){
-            if(headsets[i].name == name){
-                return i;
-            } 
-        } 
-    } else if (product_type == "monitor") {
-        for(int i = 0; i < monitors.size(); i++){
-            if(monitors[i].name == name){
+            if(consoles[i].get_name() == name){
                 return i;
             } 
         } 
     }
+
+    else if (product_type == "headset") {
+        for(int i = 0; i < headsets.size(); i++){
+            if(headsets[i].get_name() == name){
+                return i;
+            } 
+        } 
+    } 
+    
+    else if (product_type == "monitor") {
+        for(int i = 0; i < monitors.size(); i++){
+            if(monitors[i].get_name() == name){
+                return i;
+            } 
+        } 
+    }
+
     return -1;
 }
 
@@ -257,38 +270,41 @@ void search_product(){
     std::string product_type {};
     std::cout << "What's your product type ? (game/ console/ headset/ monitor) \n";
     std::cin >> product_type;
+
     std::string name {};
     std::cout << "What's the name of your " << product_type << " : \n";
     std::cin.ignore();
     std::getline(std::cin, name);
-    if (product_type == "game"){
 
+    if (product_type == "game"){
         if (linear_search(name, product_type)){
             std::cout << "Founded ! \n" << "it's your number " << number_search(name, product_type) + 1 << " " << product_type  << "\n";
-        } else {
-            std::cout << "Not founded ! \n";
-        }
-    } else if (product_type == "console"){
+        } 
+        else std::cout << "Not founded ! \n";
+    } 
+    
+    else if (product_type == "console"){
 
          if (linear_search(name, product_type)){
             std::cout << "Founded ! \n" << "it's your number " << number_search(name, product_type) + 1 << " " << product_type  << "\n";
-        } else {
-            std::cout << "Not founded ! \n";
-        }
-    } else if (product_type == "headset"){
+        } 
+        else std::cout << "Not founded ! \n";
+    } 
+    
+    else if (product_type == "headset"){
 
          if (linear_search(name, product_type)){
             std::cout << "Founded ! \n" << "it's your number " << number_search(name, product_type) + 1 << " " << product_type  << "\n";
-        } else {
-            std::cout << "Not founded ! \n";
         }
-    } else if (product_type == "monitor"){
+        else std::cout << "Not founded ! \n";
+    } 
+    
+    else if (product_type == "monitor"){
         
          if (linear_search(name, product_type)){
             std::cout << "Founded ! \n" << "it's your number " << number_search(name, product_type) + 1 << " " << product_type  << "\n";
-        } else {
-            std::cout << "Not founded ! \n";
-        }
+        } 
+        else std::cout << "Not founded ! \n";
     } 
 }
 
@@ -776,9 +792,9 @@ void main_menu(std::string user_type) {
         } while (password != "admin1admin");
     } else if (user_type == "customer") {
         customer_menu();
-    } else {
-        std::cout << "Invalid answer! \n";
-    }
+    } 
+    
+    else std::cout << "Invalid answer! \n";
 }
 
 int main(){
