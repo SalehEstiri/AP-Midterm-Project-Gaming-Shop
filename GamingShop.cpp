@@ -540,8 +540,13 @@ void shop(){
             if (number == games[choice - 1].get_inventory()) {
                 games.erase(games.begin() + choice - 1);
             } else {
-                games[choice - 1].inventory -= number;
-                games[choice - 1].price -= cart_item.get_price();
+                i = games[choice - 1].get_inventory();
+                i -= number;
+                games[choice - 1].set_inventory(i);
+
+                p = games[choice - 1].get_price();
+                p -= cart_item.get_price();
+                games[choice - 1].set_price(p);
             }
             admin_wallet += cart_item.get_price();
             customer_wallet -= cart_item.get_price();
@@ -578,9 +583,15 @@ void shop(){
             std::cout << "You don't have enough money ! \n";
             return;
         }
-        cart_item.name = consoles[choice - 1].name;
-        cart_item.price = number * (consoles[choice - 1].get_price() / consoles[choice - 1].get_inventory());
-        cart_item.inventory = number;
+        std::string n = consoles[choice - 1].get_name();
+        cart_item.set_name (n);
+
+        int p = number * (consoles[choice - 1].get_price() / consoles[choice - 1].get_inventory());
+        cart_item.set_price (p);
+
+        int i = number;
+        cart_item.set_inventory (i);
+
         cart.push_back(cart_item);
 
         std::string answer{};
@@ -590,8 +601,13 @@ void shop(){
             if (number == consoles[choice - 1].get_inventory()) {
                 consoles.erase(consoles.begin() + choice - 1);
             } else {
-                consoles[choice - 1].inventory -= number;
-                consoles[choice - 1].price -= cart_item.get_price();
+                i = consoles[choice - 1].get_inventory();
+                i -= number;
+                consoles[choice - 1].set_inventory(i);
+
+                p = consoles[choice - 1].get_price();
+                p -= cart_item.get_price();
+                consoles[choice - 1].set_price(p);
             }
             admin_wallet += cart_item.get_price();
             customer_wallet -= cart_item.get_price();
@@ -628,9 +644,15 @@ void shop(){
             std::cout << "You don't have enough money ! \n";
             return;
         }
-        cart_item.name = headsets[choice - 1].get_name();
-        cart_item.price = number * (headsets[choice - 1].get_price() / headsets[choice - 1].get_inventory());
-        cart_item.inventory = number;
+        std::string n = headsets[choice - 1].get_name();
+        cart_item.set_name (n);
+
+        int p = number * (headsets[choice - 1].get_price() / headsets[choice - 1].get_inventory());
+        cart_item.set_price (p);
+
+        int i = number;
+        cart_item.set_inventory (i);
+
         cart.push_back(cart_item);
 
         std::string answer{};
@@ -640,8 +662,13 @@ void shop(){
             if (number == headsets[choice - 1].get_inventory()) {
                 headsets.erase(headsets.begin() + choice - 1);
             } else {
-                headsets[choice - 1].inventory -= number;
-                headsets[choice - 1].price -= cart_item.get_price();
+                i = headsets[choice - 1].get_inventory();
+                i -= number;
+                headsets[choice - 1].set_inventory(i);
+
+                p = headsets[choice - 1].get_price();
+                p -= cart_item.get_price();
+                headsets[choice - 1].set_price(p);
             }
             admin_wallet += cart_item.get_price();
             customer_wallet -= cart_item.get_price();
@@ -678,9 +705,15 @@ void shop(){
             std::cout << "You don't have enough money ! \n";
             return;
         }
-        cart_item.name = monitors[choice - 1].get_name();
-        cart_item.price = number * (monitors[choice - 1].get_price() / monitors[choice - 1].get_inventory());
-        cart_item.inventory = number;
+        std::string n = monitors[choice - 1].get_name();
+        cart_item.set_name (n);
+
+        int p = number * (monitors[choice - 1].get_price() / monitors[choice - 1].get_inventory());
+        cart_item.set_price (p);
+
+        int i = number;
+        cart_item.set_inventory (i);
+
         cart.push_back(cart_item);
 
         std::string answer{};
@@ -690,8 +723,13 @@ void shop(){
             if (number == monitors[choice - 1].get_inventory()) {
                 monitors.erase(monitors.begin() + choice - 1);
             } else {
-                monitors[choice - 1].inventory -= number;
-                monitors[choice - 1].price -= cart_item.get_price();
+                i = monitors[choice - 1].get_inventory();
+                i -= number;
+                monitors[choice - 1].set_inventory(i);
+
+                p = monitors[choice - 1].get_price();
+                p -= cart_item.get_price();
+                monitors[choice - 1].set_price(p);
             }
             admin_wallet += cart_item.get_price();
             customer_wallet -= cart_item.get_price();
