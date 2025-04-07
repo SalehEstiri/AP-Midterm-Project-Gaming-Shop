@@ -11,8 +11,10 @@ public:
     std::string get_name ();
 
     void set_price (int p);
+    int get_price ();
 
     void set_inventory (int i);
+    int get_inventory ();
 };
 
 void Product::set_name (std::string n) {
@@ -29,6 +31,14 @@ void Product::set_price (int p){
 
 void Product::set_inventory (int i){
     inventory = i;
+}
+
+int Product::get_price(){
+    return price;
+}
+
+int Product::get_inventory(){
+    return inventory;
 }
 
 class Game : public Product {};
@@ -312,9 +322,9 @@ void show_product(){
     if (!games.empty()){
         std::cout << "Your games are : \n";
         for(int i = 0; i < games.size(); i++){
-            std::cout << i + 1 << "- " << games[i].name << std::endl;
-            std::cout << "Price : " << games[i].price << std::endl;
-            std::cout << "Inventory : " << games[i].inventory << std::endl;
+            std::cout << i + 1 << "- " << games[i].get_name() << std::endl;
+            std::cout << "Price : " << games[i].get_price() << std::endl;
+            std::cout << "Inventory : " << games[i].get_inventory() << std::endl;
             std::cout << "------------------------ \n";
         }
     }
@@ -322,9 +332,9 @@ void show_product(){
     if (!headsets.empty()){
         std::cout << "Your headsets are : \n";
         for(int i = 0; i < headsets.size(); i++){
-            std::cout << i + 1 << "- " << headsets[i].name << std::endl;
-            std::cout << "Price : " << headsets[i].price << std::endl;
-            std::cout << "Inventory : " << headsets[i].inventory << std::endl;
+            std::cout << i + 1 << "- " << headsets[i].get_name() << std::endl;
+            std::cout << "Price : " << headsets[i].get_price() << std::endl;
+            std::cout << "Inventory : " << headsets[i].get_inventory() << std::endl;
             std::cout << "------------------------ \n";
         }
     }
@@ -332,9 +342,9 @@ void show_product(){
     if (!monitors.empty()){
         std::cout << "Your monitors are : \n";
         for(int i = 0; i < monitors.size(); i++){
-            std::cout << i + 1 << "- " << monitors[i].name << std::endl;
-            std::cout << "Price : " << monitors[i].price << std::endl;
-            std::cout << "Inventory : " << monitors[i].inventory << std::endl;
+            std::cout << i + 1 << "- " << monitors[i].get_name() << std::endl;
+            std::cout << "Price : " << monitors[i].get_price() << std::endl;
+            std::cout << "Inventory : " << monitors[i].get_inventory() << std::endl;
             std::cout << "------------------------ \n";
         }
     }
@@ -342,9 +352,9 @@ void show_product(){
     if (!consoles.empty()){
         std::cout << "Your consoles are : \n";
         for(int i = 0; i < consoles.size(); i++){
-            std::cout << i + 1 << "- " << consoles[i].name << std::endl;
-            std::cout << "Price : " << consoles[i].price << std::endl;
-            std::cout << "Inventory : " << consoles[i].inventory << std::endl;
+            std::cout << i + 1 << "- " << consoles[i].get_name() << std::endl;
+            std::cout << "Price : " << consoles[i].get_price() << std::endl;
+            std::cout << "Inventory : " << consoles[i].get_inventory() << std::endl;
             std::cout << "------------------------ \n";
         }
     }
@@ -357,22 +367,22 @@ void total_value(){
     int monitor_p = 0;
     int total = 0;
     for(int i = 0; i < games.size(); i++){
-        game_p += games[i].price;
+        game_p += games[i].get_price();
     }
     std::cout << "Total price of your games : " << game_p << std::endl;
 
     for(int i = 0; i < headsets.size(); i++){
-        headset_p += headsets[i].price;
+        headset_p += headsets[i].get_price();
     }
     std::cout << "Total price of your headsets : " << headset_p << std::endl;
 
     for(int i = 0; i < consoles.size(); i++){
-        console_p += consoles[i].price;
+        console_p += consoles[i].get_price();
     }
     std::cout << "Total price of your consoles : " << console_p << std::endl;
 
     for(int i = 0; i < monitors.size(); i++){
-        monitor_p += monitors[i].price;
+        monitor_p += monitors[i].get_price();
     }
     std::cout << "Total price of your monitors : " << monitor_p << std::endl;
     
@@ -400,28 +410,28 @@ void inventory(){
 
     if (!games.empty()){
     for(int i = 0; i < games.size(); i++){
-        game_i += games[i].inventory;
+        game_i += games[i].get_inventory();
     }
     std::cout << "your game invetory is : " << game_i << std::endl;
     }
 
     if (!consoles.empty()){
     for(int i = 0; i < consoles.size(); i++){
-        console_i += consoles[i].inventory;
+        console_i += consoles[i].get_inventory();
     }
     std::cout << "your console invetory is : " << console_i << std::endl;
     }
 
     if(!headsets.empty()){
     for(int i = 0; i < headsets.size(); i++){
-        headest_i += headsets[i].inventory;
+        headest_i += headsets[i].get_inventory();
     }
     std::cout << "your headset invetory is : " << headest_i << std::endl;
     }
 
     if(!monitors.empty()){
     for(int i = 0; i < monitors.size(); i++){
-        monitor_i += monitors[i].inventory;
+        monitor_i += monitors[i].get_inventory();
     }
     std::cout << "your monitor invetory is : " << monitor_i << std::endl;
     }
@@ -491,7 +501,7 @@ void shop(){
     if (product_type == "game"){
         std::cout << "-------------------------\n";
         for(int i = 0; i < games.size(); i++){
-            std::cout << i + 1 << "- " << games[i].name << "\n";
+            std::cout << i + 1 << "- " << games[i].get_name() << "\n";
         }
         std::cout << "-------------------------\n";
         int choice{}, number {};
@@ -503,31 +513,38 @@ void shop(){
         }
         std::cout << "How many do you want : \n";
         std::cin >> number;
-        if(number > games[choice -1].inventory){
+        if(number > games[choice -1].get_inventory()){
             std::cout << "Invalid input ! \n";
             return;
         }
-        else if (number * (games[choice - 1].price / games[choice - 1].inventory) > customer_wallet){
+        else if (number * (games[choice - 1].get_price() / games[choice - 1].get_inventory()) > customer_wallet){
             std::cout << "You don't have enough money ! \n";
             return;
         }
-        cart_item.name = games[choice - 1].name;
-        cart_item.price = number * (games[choice - 1].price / games[choice - 1].inventory);
-        cart_item.inventory = number;
+        std::string n = games[choice - 1].get_name();
+        cart_item.set_name (n);
+
+        int p = number * (games[choice - 1].get_price() / games[choice - 1].get_inventory());
+        cart_item.set_price (p);
+
+        int i = number;
+        cart_item.set_inventory (i); 
+
         cart.push_back(cart_item);
 
         std::string answer{};
         std::cout << "Are you sure about your item ? (yes / no) \n";
         std::cin >> answer;
+        
         if (answer == "yes"){
-            if (number == games[choice - 1].inventory) {
+            if (number == games[choice - 1].get_inventory()) {
                 games.erase(games.begin() + choice - 1);
             } else {
                 games[choice - 1].inventory -= number;
-                games[choice - 1].price -= cart_item.price;
+                games[choice - 1].price -= cart_item.get_price();
             }
-            admin_wallet += cart_item.price;
-            customer_wallet -= cart_item.price;
+            admin_wallet += cart_item.get_price();
+            customer_wallet -= cart_item.get_price();
         } 
         else if (answer == "no"){
             cart.erase(cart.end());
@@ -541,7 +558,7 @@ void shop(){
     else if (product_type == "console"){
         std::cout << "-------------------------\n";
         for(int i = 0; i < consoles.size(); i++){
-            std::cout << i + 1 << "- " << consoles[i].name << "\n";
+            std::cout << i + 1 << "- " << consoles[i].get_name() << "\n";
         }
         std::cout << "-------------------------\n";
         int choice{}, number {};
@@ -553,16 +570,16 @@ void shop(){
         }
         std::cout << "How many do you want : \n";
         std::cin >> number;
-        if(number > consoles[choice -1].inventory){
+        if(number > consoles[choice -1].get_inventory()){
             std::cout << "Invalid input ! \n";
             return;
         }
-        else if (number * (consoles[choice - 1].price / consoles[choice - 1].inventory) > customer_wallet){
+        else if (number * (consoles[choice - 1].get_price() / consoles[choice - 1].get_inventory()) > customer_wallet){
             std::cout << "You don't have enough money ! \n";
             return;
         }
         cart_item.name = consoles[choice - 1].name;
-        cart_item.price = number * (consoles[choice - 1].price / consoles[choice - 1].inventory);
+        cart_item.price = number * (consoles[choice - 1].get_price() / consoles[choice - 1].get_inventory());
         cart_item.inventory = number;
         cart.push_back(cart_item);
 
@@ -570,14 +587,14 @@ void shop(){
         std::cout << "Are you sure about your item ? (yes / no) \n";
         std::cin >> answer;
         if (answer == "yes"){
-            if (number == consoles[choice - 1].inventory) {
+            if (number == consoles[choice - 1].get_inventory()) {
                 consoles.erase(consoles.begin() + choice - 1);
             } else {
                 consoles[choice - 1].inventory -= number;
-                consoles[choice - 1].price -= cart_item.price;
+                consoles[choice - 1].price -= cart_item.get_price();
             }
-            admin_wallet += cart_item.price;
-            customer_wallet -= cart_item.price;
+            admin_wallet += cart_item.get_price();
+            customer_wallet -= cart_item.get_price();
         } 
         else if (answer == "no"){
             cart.erase(cart.end());
@@ -591,7 +608,7 @@ void shop(){
     else if (product_type == "headset"){
         std::cout << "-------------------------\n";
         for(int i = 0; i < headsets.size(); i++){
-            std::cout << i + 1 << "- " << headsets[i].name << "\n";
+            std::cout << i + 1 << "- " << headsets[i].get_name() << "\n";
         }
         std::cout << "-------------------------\n";
         int choice{}, number {};
@@ -603,16 +620,16 @@ void shop(){
         }
         std::cout << "How many do you want : \n";
         std::cin >> number;
-        if(number > headsets[choice -1].inventory){
+        if(number > headsets[choice -1].get_inventory()){
             std::cout << "Invalid input ! \n";
             return;
         }
-        else if (number * (headsets[choice - 1].price / headsets[choice - 1].inventory) > customer_wallet){
+        else if (number * (headsets[choice - 1].get_price() / headsets[choice - 1].get_inventory()) > customer_wallet){
             std::cout << "You don't have enough money ! \n";
             return;
         }
-        cart_item.name = headsets[choice - 1].name;
-        cart_item.price = number * (headsets[choice - 1].price / headsets[choice - 1].inventory);
+        cart_item.name = headsets[choice - 1].get_name();
+        cart_item.price = number * (headsets[choice - 1].get_price() / headsets[choice - 1].get_inventory());
         cart_item.inventory = number;
         cart.push_back(cart_item);
 
@@ -620,14 +637,14 @@ void shop(){
         std::cout << "Are you sure about your item ? (yes / no) \n";
         std::cin >> answer;
         if (answer == "yes"){
-            if (number == headsets[choice - 1].inventory) {
+            if (number == headsets[choice - 1].get_inventory()) {
                 headsets.erase(headsets.begin() + choice - 1);
             } else {
                 headsets[choice - 1].inventory -= number;
-                headsets[choice - 1].price -= cart_item.price;
+                headsets[choice - 1].price -= cart_item.get_price();
             }
-            admin_wallet += cart_item.price;
-            customer_wallet -= cart_item.price;
+            admin_wallet += cart_item.get_price();
+            customer_wallet -= cart_item.get_price();
         } 
         else if (answer == "no"){
             cart.erase(cart.end());
@@ -641,7 +658,7 @@ void shop(){
     else if (product_type == "monitor"){
         std::cout << "-------------------------\n";
         for(int i = 0; i < monitors.size(); i++){
-            std::cout << i + 1 << "- " << monitors[i].name << "\n";
+            std::cout << i + 1 << "- " << monitors[i].get_name() << "\n";
         }
         std::cout << "-------------------------\n";
         int choice{}, number {};
@@ -653,16 +670,16 @@ void shop(){
         }
         std::cout << "How many do you want : \n";
         std::cin >> number;
-        if(number > monitors[choice -1].inventory){
+        if(number > monitors[choice -1].get_inventory()){
             std::cout << "Invalid input ! \n";
             return;
         }
-        else if (number * (monitors[choice - 1].price / monitors[choice - 1].inventory) > customer_wallet){
+        else if (number * (monitors[choice - 1].get_price() / monitors[choice - 1].get_inventory()) > customer_wallet){
             std::cout << "You don't have enough money ! \n";
             return;
         }
-        cart_item.name = monitors[choice - 1].name;
-        cart_item.price = number * (monitors[choice - 1].price / monitors[choice - 1].inventory);
+        cart_item.name = monitors[choice - 1].get_name();
+        cart_item.price = number * (monitors[choice - 1].get_price() / monitors[choice - 1].get_inventory());
         cart_item.inventory = number;
         cart.push_back(cart_item);
 
@@ -670,14 +687,14 @@ void shop(){
         std::cout << "Are you sure about your item ? (yes / no) \n";
         std::cin >> answer;
         if (answer == "yes"){
-            if (number == monitors[choice - 1].inventory) {
+            if (number == monitors[choice - 1].get_inventory()) {
                 monitors.erase(monitors.begin() + choice - 1);
             } else {
                 monitors[choice - 1].inventory -= number;
-                monitors[choice - 1].price -= cart_item.price;
+                monitors[choice - 1].price -= cart_item.get_price();
             }
-            admin_wallet += cart_item.price;
-            customer_wallet -= cart_item.price;
+            admin_wallet += cart_item.get_price();
+            customer_wallet -= cart_item.get_price();
         } 
         else if (answer == "no"){
             cart.erase(cart.end());
@@ -695,9 +712,9 @@ void shop(){
 void cart_inventory(){
     std::cout << "Your cart inventory is : \n";
     for(int i = 0; i < cart.size(); i++){
-        std::cout << i + 1 << "- " << cart[i].name << "\n";
-        std::cout << "Price : " << cart[i].price << "\n";
-        std::cout << "Inventory : " << cart[i].inventory << "\n";
+        std::cout << i + 1 << "- " << cart[i].get_name() << "\n";
+        std::cout << "Price : " << cart[i].get_price() << "\n";
+        std::cout << "Inventory : " << cart[i].get_inventory() << "\n";
         std::cout << "----------------------\n";
     }
 }
